@@ -3,156 +3,893 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>РФ-Новости — Свежие события</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <title>Новости Переславля-Залесского — Городской портал</title>
+    <meta name="description" content="Актуальные новости Переславля-Залесского и Ярославской области. События, происшествия, культура, туризм.">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #f4f7f6;
-            --card: #ffffff;
-            --accent: #e63946;
-            --text: #1d3557;
+            --primary: #1a5f7a;
+            --primary-dark: #0d3d52;
+            --accent: #c49b3b;
+            --accent-light: #d4af57;
+            --bg: #f5f5f0;
+            --card-bg: #ffffff;
+            --text: #2c3e50;
+            --text-light: #5a6c7d;
+            --border: #e0e0d8;
+        }
+
+        * {
+            box-sizing: border-box;
         }
 
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Open Sans', sans-serif;
             background-color: var(--bg);
             color: var(--text);
             margin: 0;
             padding: 0;
+            line-height: 1.6;
         }
 
+        /* Header */
         header {
-            background-color: var(--text);
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
             color: white;
-            padding: 2rem 1rem;
+            padding: 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="15" fill="rgba(255,255,255,0.03)"/><circle cx="80" cy="60" r="20" fill="rgba(255,255,255,0.03)"/><circle cx="50" cy="90" r="10" fill="rgba(255,255,255,0.03)"/></svg>');
+            background-size: 200px;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
             text-align: center;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
 
-        .container {
-            max-width: 1000px;
-            margin: 2rem auto;
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .logo-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+        }
+
+        header h1 {
+            font-family: 'Merriweather', serif;
+            font-size: 2.2rem;
+            margin: 0;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .city-subtitle {
+            font-size: 1rem;
+            opacity: 0.9;
+            margin-top: 0.5rem;
+            color: var(--accent-light);
+        }
+
+        /* Navigation */
+        nav {
+            background: var(--primary-dark);
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
             padding: 0 1rem;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
         }
 
-        /* Сетка для новостей */
+        .nav-btn {
+            background: transparent;
+            border: none;
+            color: white;
+            padding: 0.8rem 1.2rem;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        .nav-btn:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        .nav-btn.active {
+            border-bottom-color: var(--accent);
+            background: rgba(255,255,255,0.1);
+        }
+
+        /* Main content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        .section-title {
+            font-family: 'Merriweather', serif;
+            font-size: 1.5rem;
+            color: var(--primary-dark);
+            margin: 0 0 1.5rem 0;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid var(--accent);
+            display: inline-block;
+        }
+
+        /* Featured news */
+        .featured-section {
+            margin-bottom: 2.5rem;
+        }
+
+        .featured-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 1.5rem;
+        }
+
+        @media (max-width: 900px) {
+            .featured-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .featured-main {
+            background: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .featured-image {
+            height: 250px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 4rem;
+        }
+
+        .featured-content {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .featured-category {
+            color: var(--accent);
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .featured-title {
+            font-family: 'Merriweather', serif;
+            font-size: 1.4rem;
+            margin: 0 0 1rem 0;
+            line-height: 1.4;
+            color: var(--text);
+        }
+
+        .featured-desc {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            flex-grow: 1;
+            margin-bottom: 1rem;
+        }
+
+        .featured-meta {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .featured-sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .sidebar-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 1.2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .sidebar-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .sidebar-title {
+            font-family: 'Merriweather', serif;
+            font-size: 1rem;
+            margin: 0 0 0.5rem 0;
+            line-height: 1.4;
+            color: var(--text);
+        }
+
+        .sidebar-meta {
+            font-size: 0.8rem;
+            color: var(--text-light);
+        }
+
+        /* News grid */
+        .news-section {
+            margin-bottom: 2.5rem;
+        }
+
         #news-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 1.5rem;
         }
 
         .news-card {
-            background: var(--card);
+            background: var(--card-bg);
             border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-            transition: transform 0.2s;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            transition: transform 0.2s, box-shadow 0.2s;
             display: flex;
             flex-direction: column;
         }
 
         .news-card:hover {
             transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .news-image {
+            height: 160px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2.5rem;
+        }
+
+        .news-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         .news-content {
-            padding: 1.5rem;
+            padding: 1.2rem;
             display: flex;
             flex-direction: column;
             flex-grow: 1;
         }
 
-        .news-title {
-            font-size: 1.25rem;
+        .news-category {
+            color: var(--accent);
+            font-size: 0.75rem;
             font-weight: 600;
-            margin: 0 0 1rem 0;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .news-title {
+            font-family: 'Merriweather', serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin: 0 0 0.8rem 0;
             color: var(--text);
             line-height: 1.4;
         }
 
         .news-desc {
-            font-size: 0.95rem;
-            color: #555;
-            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-bottom: 1rem;
             flex-grow: 1;
+        }
+
+        .news-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .news-date {
+            font-size: 0.8rem;
+            color: var(--text-light);
         }
 
         .news-link {
             text-decoration: none;
-            color: var(--accent);
-            font-weight: bold;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            border: 1px solid var(--accent);
-            padding: 0.5rem 1rem;
-            border-radius: 6px;
-            text-align: center;
-            transition: 0.3s;
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: color 0.3s;
         }
 
         .news-link:hover {
-            background: var(--accent);
-            color: white;
+            color: var(--accent);
         }
 
+        /* Info block */
+        .info-block {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            border-radius: 12px;
+            padding: 2rem;
+            color: white;
+            margin-bottom: 2.5rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .info-item {
+            text-align: center;
+        }
+
+        .info-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .info-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+        }
+
+        .info-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        /* Loader */
         .loader {
             text-align: center;
-            font-size: 1.2rem;
+            padding: 3rem;
+            color: var(--text-light);
+        }
+
+        .loader-spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid var(--border);
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary-dark);
+            color: white;
+            padding: 2rem 1rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+
+        .footer-copy {
+            font-size: 0.85rem;
+            opacity: 0.7;
+        }
+
+        /* Weather widget */
+        .weather-widget {
+            background: rgba(255,255,255,0.1);
+            border-radius: 8px;
+            padding: 1rem 1.5rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .weather-icon {
+            font-size: 2rem;
+        }
+
+        .weather-temp {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .weather-desc {
+            font-size: 0.85rem;
+            opacity: 0.9;
+        }
+
+        /* Error state */
+        .error-message {
+            text-align: center;
             padding: 2rem;
+            color: var(--text-light);
+            background: var(--card-bg);
+            border-radius: 12px;
+            margin: 1rem 0;
+        }
+
+        .error-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        /* About section */
+        .about-section {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        @media (max-width: 768px) {
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .about-text h3 {
+            font-family: 'Merriweather', serif;
+            color: var(--primary-dark);
+            margin-top: 0;
+        }
+
+        .about-text p {
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+
+        .about-facts {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .fact-item {
+            background: var(--bg);
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .fact-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .fact-label {
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+
+        @media (max-width: 600px) {
+            header h1 {
+                font-size: 1.6rem;
+            }
+
+            .featured-image {
+                height: 180px;
+            }
+
+            .nav-btn {
+                padding: 0.6rem 0.8rem;
+                font-size: 0.8rem;
+            }
         }
     </style>
 </head>
 <body>
 
 <header>
-    <h1>Новости России</h1>
-    <p>Актуальные события в реальном времени</p>
+    <div class="header-content">
+        <div class="logo">
+            <div class="logo-icon">⛪</div>
+            <div>
+                <h1>Новости Переславля-Залесского</h1>
+                <p class="city-subtitle">Город Золотого Кольца России • Основан в 1152 году</p>
+            </div>
+        </div>
+        <div class="weather-widget" id="weather">
+            <span class="weather-icon">🌤️</span>
+            <div>
+                <div class="weather-temp" id="weather-temp">--°C</div>
+                <div class="weather-desc">Переславль-Залесский</div>
+            </div>
+        </div>
+    </div>
+    <nav>
+        <div class="nav-content">
+            <button class="nav-btn active" data-category="all">Все новости</button>
+            <button class="nav-btn" data-category="region">Регион</button>
+            <button class="nav-btn" data-category="culture">Культура</button>
+            <button class="nav-btn" data-category="sport">Спорт</button>
+            <button class="nav-btn" data-category="tourism">Туризм</button>
+        </div>
+    </nav>
 </header>
 
-<div class="container">
-    <div id="loader" class="loader">Загрузка свежих новостей...</div>
-    <div id="news-grid"></div>
-</div>
+<main class="container">
+    <!-- About section -->
+    <section class="about-section">
+        <div class="about-content">
+            <div class="about-text">
+                <h3>Добро пожаловать в Переславль-Залесский</h3>
+                <p>Древний русский город на берегу Плещеева озера, входящий в Золотое кольцо России. Здесь родился Александр Невский, молодой Пётр I строил свою потешную флотилию, а сегодня город привлекает туристов уникальными монастырями и музеями.</p>
+            </div>
+            <div class="about-facts">
+                <div class="fact-item">
+                    <div class="fact-value">1152</div>
+                    <div class="fact-label">Год основания</div>
+                </div>
+                <div class="fact-item">
+                    <div class="fact-value">39 000</div>
+                    <div class="fact-label">Население</div>
+                </div>
+                <div class="fact-item">
+                    <div class="fact-value">5</div>
+                    <div class="fact-label">Монастырей</div>
+                </div>
+                <div class="fact-item">
+                    <div class="fact-value">20+</div>
+                    <div class="fact-label">Музеев</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured news -->
+    <section class="featured-section">
+        <h2 class="section-title">Главные новости</h2>
+        <div id="featured-area">
+            <div class="loader">
+                <div class="loader-spinner"></div>
+                Загрузка главных новостей...
+            </div>
+        </div>
+    </section>
+
+    <!-- News grid -->
+    <section class="news-section">
+        <h2 class="section-title">Последние события</h2>
+        <div id="news-grid">
+            <div class="loader">
+                <div class="loader-spinner"></div>
+                Загрузка новостей региона...
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <div class="footer-content">
+        <div class="footer-links">
+            <a href="https://pereslavlzalesskiy.bezformata.com/" target="_blank">БезФормата</a>
+            <a href="https://76.ru/text/tags/pereslavl-zalesskiy/" target="_blank">76.ru</a>
+            <a href="https://ria.ru/location_Pereslavl_Zalesskijj/" target="_blank">РИА Новости</a>
+            <a href="https://www.yarregion.ru/" target="_blank">Ярославская область</a>
+        </div>
+        <p class="footer-copy">Новости Переславля-Залесского © 2024-2026. Информационный портал города.</p>
+    </div>
+</footer>
 
 <script>
-    // Ссылка на RSS ленту (в данном случае Lenta.ru через прокси)
-    const RSS_URL = 'https://lenta.ru/rss';
-    const API_URL = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(RSS_URL)}`;
+    // News categories for visual indication
+    const categories = ['Город', 'Культура', 'Общество', 'Туризм', 'Спорт', 'Происшествия'];
+    const categoryIcons = ['🏛️', '🎭', '👥', '🗺️', '⚽', '🚨'];
 
-    async function loadNews() {
-        try {
-            const response = await fetch(API_URL);
-            const data = await response.json();
-            
-            const loader = document.getElementById('loader');
-            const grid = document.getElementById('news-grid');
-            
-            loader.style.display = 'none';
+    // RSS sources for Yaroslavl region news
+    const RSS_SOURCES = [
+        {
+            name: 'Ярославль',
+            url: 'https://76.ru/rss/',
+            fallback: 'https://yar.mk.ru/rss.xml'
+        }
+    ];
 
-            data.items.forEach(item => {
-                const card = document.createElement('div');
-                card.className = 'news-card';
-                
-                // Очистка описания от HTML тегов
-                const cleanDesc = item.description.replace(/<[^>]*>?/gm, '');
+    const RSS_API = 'https://api.rss2json.com/v1/api.json?rss_url=';
 
-                card.innerHTML = `
-                    <div class="news-content">
-                        <h2 class="news-title">${item.title}</h2>
-                        <p class="news-desc">${cleanDesc.substring(0, 150)}...</p>
-                        <a href="${item.link}" target="_blank" class="news-link">Читать полностью</a>
+    // Get category by keywords in title
+    function getCategory(title, desc) {
+        const text = (title + ' ' + desc).toLowerCase();
+        if (text.includes('музе') || text.includes('театр') || text.includes('выставк') || text.includes('концерт') || text.includes('фестиваль')) {
+            return { name: 'Культура', icon: '🎭' };
+        }
+        if (text.includes('турист') || text.includes('отдых') || text.includes('экскурс') || text.includes('путешеств') || text.includes('озер')) {
+            return { name: 'Туризм', icon: '🗺️' };
+        }
+        if (text.includes('спорт') || text.includes('футбол') || text.includes('хоккей') || text.includes('соревнован') || text.includes('чемпион')) {
+            return { name: 'Спорт', icon: '⚽' };
+        }
+        if (text.includes('авари') || text.includes('пожар') || text.includes('дтп') || text.includes('происшеств') || text.includes('чп')) {
+            return { name: 'Происшествия', icon: '🚨' };
+        }
+        if (text.includes('переславл') || text.includes('ярославл') || text.includes('област')) {
+            return { name: 'Регион', icon: '🏛️' };
+        }
+        return { name: 'Общество', icon: '👥' };
+    }
+
+    // Format date
+    function formatDate(dateStr) {
+        const date = new Date(dateStr);
+        const options = { day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit' };
+        return date.toLocaleDateString('ru-RU', options);
+    }
+
+    // Clean HTML from text
+    function cleanHtml(html) {
+        const div = document.createElement('div');
+        div.innerHTML = html;
+        return div.textContent || div.innerText || '';
+    }
+
+    // Extract image from content
+    function extractImage(content) {
+        const match = content.match(/<img[^>]+src="([^">]+)"/);
+        return match ? match[1] : null;
+    }
+
+    // Render featured news
+    function renderFeatured(items) {
+        const area = document.getElementById('featured-area');
+        if (!items || items.length === 0) {
+            area.innerHTML = '<div class="error-message"><div class="error-icon">📰</div>Главные новости временно недоступны</div>';
+            return;
+        }
+
+        const main = items[0];
+        const sidebar = items.slice(1, 4);
+        const mainCategory = getCategory(main.title, main.description || '');
+        const mainDesc = cleanHtml(main.description || '').substring(0, 250);
+        const mainImage = extractImage(main.content || main.description || '');
+
+        let html = `
+            <div class="featured-grid">
+                <div class="featured-main">
+                    <div class="featured-image" ${mainImage ? `style="background: url('${mainImage}') center/cover"` : ''}>
+                        ${!mainImage ? mainCategory.icon : ''}
                     </div>
-                `;
-                grid.appendChild(card);
-            });
+                    <div class="featured-content">
+                        <span class="featured-category">${mainCategory.icon} ${mainCategory.name}</span>
+                        <h2 class="featured-title">${main.title}</h2>
+                        <p class="featured-desc">${mainDesc}...</p>
+                        <div class="featured-meta">
+                            <span>${formatDate(main.pubDate)}</span>
+                            <a href="${main.link}" target="_blank" class="news-link">Читать далее →</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="featured-sidebar">
+        `;
+
+        sidebar.forEach(item => {
+            const cat = getCategory(item.title, item.description || '');
+            html += `
+                <a href="${item.link}" target="_blank" class="sidebar-card" style="text-decoration: none; color: inherit;">
+                    <span class="news-category">${cat.icon} ${cat.name}</span>
+                    <h3 class="sidebar-title">${item.title}</h3>
+                    <span class="sidebar-meta">${formatDate(item.pubDate)}</span>
+                </a>
+            `;
+        });
+
+        html += '</div></div>';
+        area.innerHTML = html;
+    }
+
+    // Render news grid
+    function renderNews(items) {
+        const grid = document.getElementById('news-grid');
+        if (!items || items.length === 0) {
+            grid.innerHTML = '<div class="error-message"><div class="error-icon">📰</div>Новости временно недоступны. Попробуйте обновить страницу.</div>';
+            return;
+        }
+
+        // Skip first 4 items (used in featured)
+        const newsItems = items.slice(4);
+
+        grid.innerHTML = newsItems.map(item => {
+            const category = getCategory(item.title, item.description || '');
+            const desc = cleanHtml(item.description || '').substring(0, 120);
+            const image = extractImage(item.content || item.description || '');
+
+            return `
+                <article class="news-card">
+                    <div class="news-image" ${image ? `style="background: url('${image}') center/cover"` : ''}>
+                        ${!image ? category.icon : ''}
+                    </div>
+                    <div class="news-content">
+                        <span class="news-category">${category.icon} ${category.name}</span>
+                        <h3 class="news-title">${item.title}</h3>
+                        <p class="news-desc">${desc}...</p>
+                        <div class="news-footer">
+                            <span class="news-date">${formatDate(item.pubDate)}</span>
+                            <a href="${item.link}" target="_blank" class="news-link">Подробнее →</a>
+                        </div>
+                    </div>
+                </article>
+            `;
+        }).join('');
+    }
+
+    // Load news from RSS
+    async function loadNews() {
+        // Try primary RSS source
+        const rssUrl = 'https://yar.mk.ru/rss.xml';
+
+        try {
+            const response = await fetch(RSS_API + encodeURIComponent(rssUrl));
+            const data = await response.json();
+
+            if (data.status === 'ok' && data.items && data.items.length > 0) {
+                renderFeatured(data.items);
+                renderNews(data.items);
+                return;
+            }
         } catch (error) {
-            console.error('Ошибка:', error);
-            document.getElementById('loader').innerText = 'Не удалось загрузить новости.';
+            console.error('Primary RSS failed:', error);
+        }
+
+        // Try fallback RSS
+        try {
+            const fallbackUrl = 'https://www.vesti.ru/vesti.rss';
+            const response = await fetch(RSS_API + encodeURIComponent(fallbackUrl));
+            const data = await response.json();
+
+            if (data.status === 'ok' && data.items && data.items.length > 0) {
+                renderFeatured(data.items);
+                renderNews(data.items);
+                return;
+            }
+        } catch (error) {
+            console.error('Fallback RSS failed:', error);
+        }
+
+        // Show error
+        document.getElementById('featured-area').innerHTML = '<div class="error-message"><div class="error-icon">📰</div>Не удалось загрузить новости. Попробуйте обновить страницу.</div>';
+        document.getElementById('news-grid').innerHTML = '';
+    }
+
+    // Category filter
+    document.querySelectorAll('.nav-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+
+            const category = this.dataset.category;
+            const cards = document.querySelectorAll('.news-card');
+
+            cards.forEach(card => {
+                if (category === 'all') {
+                    card.style.display = 'flex';
+                } else {
+                    const cardCategory = card.querySelector('.news-category').textContent.toLowerCase();
+                    const categoryMap = {
+                        'region': ['регион', 'город'],
+                        'culture': ['культура'],
+                        'sport': ['спорт'],
+                        'tourism': ['туризм']
+                    };
+
+                    const matches = categoryMap[category]?.some(c => cardCategory.includes(c));
+                    card.style.display = matches ? 'flex' : 'none';
+                }
+            });
+        });
+    });
+
+    // Load weather (simplified)
+    async function loadWeather() {
+        try {
+            const response = await fetch('https://api.open-meteo.com/v1/forecast?latitude=56.7389&longitude=38.8544&current_weather=true');
+            const data = await response.json();
+
+            if (data.current_weather) {
+                const temp = Math.round(data.current_weather.temperature);
+                const weatherCode = data.current_weather.weathercode;
+
+                // Weather icons based on code
+                const icons = {
+                    0: '☀️', 1: '🌤️', 2: '⛅', 3: '☁️',
+                    45: '🌫️', 48: '🌫️',
+                    51: '🌧️', 53: '🌧️', 55: '🌧️',
+                    61: '🌧️', 63: '🌧️', 65: '🌧️',
+                    71: '🌨️', 73: '🌨️', 75: '🌨️',
+                    80: '🌧️', 81: '🌧️', 82: '🌧️',
+                    95: '⛈️', 96: '⛈️', 99: '⛈️'
+                };
+
+                document.getElementById('weather-temp').textContent = `${temp}°C`;
+                document.querySelector('.weather-icon').textContent = icons[weatherCode] || '🌤️';
+            }
+        } catch (error) {
+            console.log('Weather unavailable');
         }
     }
 
+    // Initialize
     loadNews();
+    loadWeather();
 </script>
 
 </body>
