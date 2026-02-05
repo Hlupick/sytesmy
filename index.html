@@ -3,130 +3,157 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NewsApp — Новости России без рекламы</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <title>РФ-Новости — Свежие события</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #007AFF;
-            --dark: #1C1C1E;
-            --light: #F2F2F7;
-            --text: #3A3A3C;
+            --bg: #f4f7f6;
+            --card: #ffffff;
+            --accent: #e63946;
+            --text: #1d3557;
         }
 
         body {
             font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
             margin: 0;
             padding: 0;
-            background-color: white;
-            color: var(--text);
-            line-height: 1.6;
         }
 
         header {
-            padding: 80px 20px;
+            background-color: var(--text);
+            color: white;
+            padding: 2rem 1rem;
             text-align: center;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
 
         .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 20px;
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 0 1rem;
         }
 
-        h1 {
-            font-size: 3rem;
-            color: var(--dark);
-            margin-bottom: 10px;
-        }
-
-        p.subtitle {
-            font-size: 1.2rem;
-            color: #666;
-            margin-bottom: 30px;
-        }
-
-        .btn {
-            display: inline-block;
-            background-color: var(--primary);
-            color: white;
-            padding: 15px 40px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 1.1rem;
-            transition: transform 0.2s, box-shadow 0.2s;
-            box-shadow: 0 4px 15px rgba(0, 122, 255, 0.3);
-        }
-
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0, 122, 255, 0.4);
-        }
-
-        .features {
+        /* Сетка для новостей */
+        #news-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            padding: 60px 0;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
         }
 
-        .feature-card {
-            background: var(--light);
-            padding: 30px;
-            border-radius: 20px;
-            text-align: center;
+        .news-card {
+            background: var(--card);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            transition: transform 0.2s;
+            display: flex;
+            flex-direction: column;
         }
 
-        .feature-card h3 {
-            margin-top: 0;
-            color: var(--dark);
+        .news-card:hover {
+            transform: translateY(-5px);
         }
 
-        footer {
-            text-align: center;
-            padding: 40px;
+        .news-content {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .news-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin: 0 0 1rem 0;
+            color: var(--text);
+            line-height: 1.4;
+        }
+
+        .news-desc {
+            font-size: 0.95rem;
+            color: #555;
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .news-link {
+            text-decoration: none;
+            color: var(--accent);
+            font-weight: bold;
             font-size: 0.9rem;
-            color: #999;
-            border-top: 1px solid #eee;
+            text-transform: uppercase;
+            border: 1px solid var(--accent);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            text-align: center;
+            transition: 0.3s;
         }
 
-        /* Адаптивность для мобилок */
-        @media (max-width: 600px) {
-            h1 { font-size: 2rem; }
+        .news-link:hover {
+            background: var(--accent);
+            color: white;
+        }
+
+        .loader {
+            text-align: center;
+            font-size: 1.2rem;
+            padding: 2rem;
         }
     </style>
 </head>
 <body>
 
 <header>
-    <div class="container">
-        <h1>NewsApp</h1>
-        <p class="subtitle">Чистые новости России в вашем кармане. <br><b>Без рекламы, без подписок, без лишнего шума.</b></p>
-        <a href="app-debug.apk" class="btn">Скачать APK бесплатно</a>
-    </div>
+    <h1>Новости России</h1>
+    <p>Актуальные события в реальном времени</p>
 </header>
 
 <div class="container">
-    <div class="features">
-        <div class="feature-card">
-            <h3>🚫 Без рекламы</h3>
-            <p>Никаких баннеров, всплывающих окон и прерываний. Только контент.</p>
-        </div>
-        <div class="feature-card">
-            <h3>⚡ Быстрая загрузка</h3>
-            <p>Использование RSS позволяет получать новости мгновенно даже при слабом интернете.</p>
-        </div>
-        <div class="feature-card">
-            <h3>🇷🇺 Актуально</h3>
-            <p>Прямой поток новостей из крупнейших агентств России в реальном времени.</p>
-        </div>
-    </div>
+    <div id="loader" class="loader">Загрузка свежих новостей...</div>
+    <div id="news-grid"></div>
 </div>
 
-<footer>
-    <p>&copy; 2026 Создано Станиславом. Сделано с помощью Android Studio & Vercel.</p>
-</footer>
+<script>
+    // Ссылка на RSS ленту (в данном случае Lenta.ru через прокси)
+    const RSS_URL = 'https://lenta.ru/rss';
+    const API_URL = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(RSS_URL)}`;
+
+    async function loadNews() {
+        try {
+            const response = await fetch(API_URL);
+            const data = await response.json();
+            
+            const loader = document.getElementById('loader');
+            const grid = document.getElementById('news-grid');
+            
+            loader.style.display = 'none';
+
+            data.items.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'news-card';
+                
+                // Очистка описания от HTML тегов
+                const cleanDesc = item.description.replace(/<[^>]*>?/gm, '');
+
+                card.innerHTML = `
+                    <div class="news-content">
+                        <h2 class="news-title">${item.title}</h2>
+                        <p class="news-desc">${cleanDesc.substring(0, 150)}...</p>
+                        <a href="${item.link}" target="_blank" class="news-link">Читать полностью</a>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        } catch (error) {
+            console.error('Ошибка:', error);
+            document.getElementById('loader').innerText = 'Не удалось загрузить новости.';
+        }
+    }
+
+    loadNews();
+</script>
 
 </body>
 </html>
